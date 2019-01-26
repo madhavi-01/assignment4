@@ -1,0 +1,82 @@
+  <html>
+	<head>
+		<center>Online Shopping Cart</center>
+	  <script type="text/javascript">
+		function order()
+		{
+			var qu1=document.getElementById("Q1").value;
+			var qu2=document.getElementById("Q2").value;
+			var qu3=document.getElementById("Q3").value;
+			var qu4=document.getElementById("Q4").value;
+			var cname=document.getElementById("name").value;
+			var gender=document.getElementById("gender").value;
+			var caddress=document.getElementById("address").value;
+			var cpno=document.getElementById("pno").value;
+			var payment=document.getElementById("paymenttype").value;
+			var obj=new XMLHttpRequest();
+			var querystring="cart.php?name="+cname+"&gender="+gender+"&address="+caddress+"&pno="+cpno+"&paymenttype="+payment+"&Q1="+qu1+"&Q2="+qu2+"&Q3="+qu3+"&Q4="+qu4;
+			obj.onreadystatechange=function(){
+				if(obj.readyState==4&&obj.status==200)
+				{
+					document.getElementById("div").innerHTML=obj.responseText;
+				}
+		    };
+		    obj.open("GET",querystring,true);
+		    obj.send();
+		}
+	  </script>
+	</head>
+	<body>
+	<form>
+	    <style>
+
+            table, th, td {
+             border: 1px solid black;
+ 
+                 border-collapse: collapse;
+            }
+
+        </style>
+        
+		<table id="mytable">
+		<tr>
+			<th>product</th>
+			<th>price</th>
+			<th>Qty</th>
+		</tr>
+		<tr>
+			<td>USB pendrive</td>
+			<td>300</td>
+			<td><input type="text" id="Q1"/></td>
+		</tr>
+		<tr>
+			<td>Wireless Mouse</td>
+			<td>200</td>
+			<td><input type="text" id="Q2"/></td>
+		</tr>
+		<tr>
+			<td>Keyboard</td>
+			<td>400</td>
+			<td><input type="text" id="Q3"/></td>
+		</tr>
+		<tr>
+			<td>Laptop</td>
+			<td>33000</td>
+			<td><input type="text" id="Q4"/></td>
+		</tr>
+		</table>
+		NAME:<input type="text" id="name"/><br>
+		<input type="radio" id="gender" value="male" name="gender" />MALE<br>
+		<input type="radio" id="gender" value="female" name="gender"/>FEMALE<br>
+		ADDRESS:<textarea rows="10" col="10" id="address"></textarea><br>
+		phonenumber:<input type="text" id="pno"/><br>
+		<input type="radio" id="paymenttype" value="cash on delivery" name="payment"/>cash on delivery<br>
+		<input type="radio" id="paymenttype" value="internet banking" name="payment"/>internet banking<br>
+		<input type="radio" id="paymenttype" value="credit/debit" name="payment"/>credit/debit<br>
+		<input type="button" value="submit" onclick="order()"/>
+	</form>
+	<div id="div">
+		<h1>***Your Order Details***</h1>
+	</div>
+	</body>
+</html>
